@@ -10,7 +10,7 @@ function! SelectPHPVar()
 	normal! eF$
 	" Now, find the end of the variable. We need to match both $foo and
 	" $foo['bar'].
-	let [lnum, col] = searchpos("\\s\\|,\\|;\\|=\\|)")
+	let [lnum, col] = searchpos("\\s\\|,\\|;\\|=\\|(\\|)")
 	" One character back from the search result will be the end of the
 	" variable.
 	call cursor(lnum, col - 1)
