@@ -25,6 +25,7 @@ As well as some cases not easily covered by existing movements, like:
 ...where no single movement would allow you to select `$foo->bar` from
 within the variable.
 
-At the moment, movar supports PHP and Ruby, but it should be relatively
-straightforward to add new rules for different languages in the future.
+At the moment, movar supports PHP, Javascript, and Ruby, but it should
+be relatively straightforward to add new rules for different languages
+in the future.
 
