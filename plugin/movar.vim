@@ -7,7 +7,7 @@ function! SelectPHPVar()
 	" Move forward, then back to the $. This ensures we capture a) the
 	" current variable, even if the cursor is on the $; and b) the whole
 	" of the variable.
-	execute "normal! eF$"
+	normal! eF$
 	" Now, find the end of the variable. We need to match both $foo and
 	" $foo['bar'].
 	let [lnum, col] = searchpos("\\s\\|,\\|;\\|=\\|)")
@@ -15,7 +15,7 @@ function! SelectPHPVar()
 	" variable.
 	call cursor(lnum, col - 1)
 	" That's it; select back to the $ to select the whole variable.
-	execute "normal! vF$"
+	normal! vF$
 endfunction
 
 function! SelectRubyVar()
