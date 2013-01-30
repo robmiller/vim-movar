@@ -18,6 +18,35 @@ function! SelectPHPVar()
 	execute "normal! vF$"
 endfunction
 
+function! SelectRubyVar()
+	" Move forward, in case we're at the first character of the
+	" variable.
+	normal! e
+	" Now, we need to get back to the start of the variable. This is
+	" slightly harder in Ruby, since variables come in the following
+	" forms:
+	"     * @foo, @foo['bar']
+	"     * $foo, $foo['bar']
+	"     * foo, foo['bar']
+	" So, instead of moving to the $ as in PHP, we should move to the
+	" first character we find moving backwards that can't be part of
+	" a variable.
+	let [start_lnum, start_col] = searchpos("\\s\\|^\\|(", "b")
+	" Now, we need to find the end of the variable.
+	let [end_lnum, end_col] = searchpos("\\s\\|,\\|;\\|=\\|)\\|(")
+	let length = end_col - start_col - 2
+	" Move the cursor to the start of the variable...
+	if start_col == 1
+		call cursor(start_lnum, 1)
+		let length = length + 1
+	else
+		call cursor(start_lnum, start_col + 1)
+	endif
+	" ...and now select through to the end.
+	execute "normal! v" . length . "l"
+endfunction
+
 augroup Movar
-	autocmd! FileType php onoremap <buffer> av :<c-u>call SelectPHPVar()<CR>
+	autocmd! FileType php  onoremap <buffer> av :<c-u>call SelectPHPVar()<CR>
+	autocmd! FileType ruby onoremap <buffer> av :<c-u>call SelectRubyVar()<CR>
 augroup END
