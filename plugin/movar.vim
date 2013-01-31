@@ -43,7 +43,25 @@ function! SelectBareVar()
 	execute "normal! v" . length . "l"
 endfunction
 
+" For variables that have sigil characters — e.g. PHP's $, Ruby's @ and
+" $ — this will change the name of the variable while leaving the sigil
+" intact, for slightly less typing.
+function! SelectInnerVar()
+	" Move forward.
+	normal! e
+	" Search for the sigil at the start of the variable.
+	let [sigil_lnum, sigil_col] = searchpos("\\$\\|@", "b")
+	" And now, find the end of the variable.
+	let [end_lnum, end_col] = searchpos("\\s\\|,\\|;\\|=\\|)\\|(")
+	let length = end_col - sigil_col - 2
+	" Move to the first character after the sigil...
+	call cursor(sigil_lnum, sigil_col + 1)
+	" ...and then select through to the end.
+	execute "normal! v" . length . "l"
+endfunction
+
 augroup Movar
 	autocmd! FileType php             onoremap <buffer> av :<c-u>call SelectDollarVar()<CR>
 	autocmd! FileType ruby,javascript onoremap <buffer> av :<c-u>call SelectBareVar()<CR>
+	autocmd! FileType php             onoremap <buffer> iv :<c-u>call SelectInnerVar()<CR>
 augroup END
