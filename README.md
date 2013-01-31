@@ -1,9 +1,12 @@
 # movar
 
-movar is a movement for vim that makes working with variables easier.
+movar is Vim plugin that adds a couple of movements to make working with
+variables easier.
 
-It adds the movement `av` — "around variable" — which makes it easy to
-yank, change, or delete variables in one fell swoop.
+## `av`: around variable
+
+movar adds the movement `av` — "around variable" — which makes it easy
+to yank, change, or delete variables in one fell swoop.
 
 It covers a lot of use cases that previously would require several
 different movements. For example, with the cursor anywhere in the
@@ -25,6 +28,8 @@ As well as some cases not easily covered by existing movements, like:
 ...where no single movement would allow you to select `$foo->bar` from
 within the variable.
 
+## `iv`: inner variable
+
 For variables that have sigil characters — e.g. Ruby, which uses `@` for
 instance variables and `$` for global variables — movar adds another
 movement: `iv`, which matches the name of the variable but leaves the
@@ -34,6 +39,8 @@ sigil intact. So, if you have:
 
 …then calling `civ` from anywhere within the variable will change
 `foo['bar']` and leave the `@` in place.
+
+## Language support
 
 At the moment, movar supports PHP, Javascript, and Ruby, but it should
 be relatively straightforward to add new rules for different languages
