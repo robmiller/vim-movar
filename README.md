@@ -25,6 +25,16 @@ As well as some cases not easily covered by existing movements, like:
 ...where no single movement would allow you to select `$foo->bar` from
 within the variable.
 
+For variables that have sigil characters — e.g. Ruby, which uses `@` for
+instance variables and `$` for global variables — movar adds another
+movement: `iv`, which matches the name of the variable but leaves the
+sigil intact. So, if you have:
+
+	@foo['bar']
+
+…then calling `civ` from anywhere within the variable will change
+`foo['bar']` and leave the `@` in place.
+
 At the moment, movar supports PHP, Javascript, and Ruby, but it should
 be relatively straightforward to add new rules for different languages
 in the future.
