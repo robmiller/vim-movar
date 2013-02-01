@@ -61,7 +61,8 @@ function! SelectInnerVar()
 endfunction
 
 augroup Movar
-	autocmd! FileType php             onoremap <buffer> av :<c-u>call SelectDollarVar()<CR>
-	autocmd! FileType ruby,javascript onoremap <buffer> av :<c-u>call SelectBareVar()<CR>
-	autocmd! FileType php             onoremap <buffer> iv :<c-u>call SelectInnerVar()<CR>
+	autocmd!
+	autocmd FileType php             onoremap <buffer> av :<c-u>call SelectDollarVar()<CR>
+	autocmd FileType javascript,ruby onoremap <buffer> av :<c-u>call SelectBareVar()<CR>
+	autocmd FileType php,ruby        onoremap <buffer> iv :<c-u>call SelectInnerVar()<CR>
 augroup END
