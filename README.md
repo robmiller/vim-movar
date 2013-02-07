@@ -1,7 +1,7 @@
 # movar
 
-movar is Vim plugin that adds a couple of movements to make working with
-variables easier.
+movar is a Vim plugin that adds a couple of movements that make working
+with variables easier.
 
 ## `av`: around variable
 
